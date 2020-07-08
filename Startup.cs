@@ -1,6 +1,7 @@
 using System;
 using DddWorkshop.Areas.Core.Infrastructure;
 using DddWorkshop.Areas.OrderManagement.Domain;
+using DddWorkshop.Areas.Shop;
 using DddWorkshop.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -42,19 +43,19 @@ namespace DddWorkshop
                 .AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             
+            var mvcBuilder = services
+                    .AddControllersWithViews();
+            
             #if (DEBUG)
-            services
-                .AddControllersWithViews()
+            mvcBuilder
                 .AddRazorRuntimeCompilation();
             #endif
             services.AddRazorPages();
 
             services.AddMvc(options => { options.Filters.Add(new ValidationFilter()); });
 
-            #warning Will be messed up in no time
-            services.AddScoped<DeliveryService>();
-            services.AddScoped<PaymentService>();
-            services.AddScoped<DisputeService>();
+            services.RegisterShop();
+            services.RegisterOrderManagement();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
