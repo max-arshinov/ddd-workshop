@@ -1,7 +1,7 @@
 using System;
+using DddWorkshop.Areas.Core.Infrastructure;
+using DddWorkshop.Areas.OrderManagement.Domain;
 using DddWorkshop.Data;
-using DddWorkshop.Infrastructure;
-using DddWorkshop.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -51,6 +51,7 @@ namespace DddWorkshop
 
             services.AddMvc(options => { options.Filters.Add(new ValidationFilter()); });
 
+            #warning Will be messed up in no time
             services.AddScoped<DeliveryService>();
             services.AddScoped<PaymentService>();
             services.AddScoped<DisputeService>();

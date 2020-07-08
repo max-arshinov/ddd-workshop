@@ -1,5 +1,5 @@
-@using DddWorkshop.Models
-@model IEnumerable<DddWorkshop.Models.Order>
+@using DddWorkshop.Areas.OrderManagement.Domain
+@model IEnumerable<DddWorkshop.Areas.OrderManagement.Domain.Order>
 @if(Model.Any())
 {
     var fsm = new Dictionary<OrderState, IEnumerable<OrderState>>

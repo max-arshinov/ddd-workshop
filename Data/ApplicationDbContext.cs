@@ -1,4 +1,6 @@
-﻿using DddWorkshop.Models;
+﻿using DddWorkshop.Areas.AdminArea.Domain;
+using DddWorkshop.Areas.OrderManagement.Domain;
+using DddWorkshop.Areas.Shop.Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
