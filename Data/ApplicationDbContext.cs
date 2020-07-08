@@ -10,7 +10,7 @@ namespace DddWorkshop.Data
         
         public DbSet<AuditLog> AuditLogs { get; set; }
         
-        public DbSet<Cart> Carts { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

@@ -8,5 +8,7 @@ namespace DddWorkshop.Models
         public Product Product { get; set; }
         
         public int Count { get; set; }
+
+        public override string ToString() => Product.ToString();
     }
 }

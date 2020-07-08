@@ -1,8 +1,18 @@
+@using System.Net.Http
 @model DddWorkshop.Models.Cart
 
 @if (Model != null)
 {
+    <div class="form-group">
     @Html.DisplayFor(x => x.CartItems)
+    </div>
+
+    <div class="form-group">
+        @using (Html.BeginForm("CreateNew", "Order", FormMethod.Post))
+        {
+            <input class="btn btn-primary" type="submit" value="Order"/>
+        }
+    </div>
 }
 else
 {

@@ -11,12 +11,12 @@ namespace DddWorkshop.Models
         [Required]
         public string Name { get; set; }
         
-        public int Price { get; set; }
+        public double Price { get; set; }
         
         public int DiscountPercent { get; set; }
 
         [HiddenInput(DisplayValue = false)]
-        public decimal DiscountedPrice => Price - Price /100 * DiscountPercent;
+        public double DiscountedPrice => Price - Price /100 * DiscountPercent;
 
         public override string ToString() => $"{Name} ${Price}";
     }

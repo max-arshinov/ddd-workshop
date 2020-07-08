@@ -58,7 +58,7 @@ namespace DddWorkshop.Controllers
             
             HttpContext.Session.Set("Cart", cart);
             this.ShowMessage("Product added");
-            return Redirect("../");
+            return Redirect("/Cart");
         }
         
         [HttpPost]

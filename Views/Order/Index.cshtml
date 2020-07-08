@@ -1,0 +1,19 @@
+@model IEnumerable<DddWorkshop.Models.Order>
+@if(Model.Any())
+{
+    <ul>
+        @foreach (var order in Model)
+        {
+            <li>
+                <div class="form-group">
+                    @order.Id / @order.State / @order.Created / @order.Updated: $@order.Total
+                    <input type="submit" class="btn btn-primary" value="Pay"/>
+                </div>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>You have no orders so far</p>
+}
