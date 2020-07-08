@@ -43,8 +43,8 @@ namespace DddWorkshop.Areas.OrderManagement.Domain
         }
 
         public IdentityUser User { get; protected set; }
-        
-        public DateTime Created { get; protected set; }
+
+        public DateTime Created { get; protected set; } = DateTime.UtcNow;
         
         public DateTime Updated { get; protected set; }
 
