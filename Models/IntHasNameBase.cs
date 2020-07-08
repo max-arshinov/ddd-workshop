@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace DotNext.DddWorkshop.Models
+namespace DddWorkshop.Models
 {
-    public class HasNameBase: HasIdBase
+    public class IntHasNameBase: IntHasIdBase
     {
         [Required]
         public string Name { get; set; }

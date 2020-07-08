@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace DotNext.DddWorkshop.Infrastructure
+namespace DddWorkshop.Infrastructure
 {
     public abstract class Specs<T>
     {

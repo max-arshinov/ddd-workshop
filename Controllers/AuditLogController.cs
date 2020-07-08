@@ -1,11 +1,10 @@
 using System.Linq;
-using DotNext.DddWorkshop.Areas.Products.Domain;
-using DotNext.DddWorkshop.Infrastructure;
-using DotNext.DddWorkshop.Models;
+using DddWorkshop.Infrastructure;
+using DddWorkshop.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace DotNext.DddWorkshop.Areas.AudtiLogs
+namespace DddWorkshop.Controllers
 {
     public class AuditLogController : Controller
     {

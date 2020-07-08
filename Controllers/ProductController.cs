@@ -1,39 +1,14 @@
+using System;
 using System.Linq;
-using DotNext.DddWorkshop.Areas.Products.Domain;
-using DotNext.DddWorkshop.Infrastructure;
-using DotNext.DddWorkshop.Models;
+using DddWorkshop.Infrastructure;
+using DddWorkshop.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace DotNext.DddWorkshop.Areas.Products
+namespace DddWorkshop.Controllers
 {
     public class ProductController : Controller
     {
-        public IActionResult Init([FromServices] DbContext dbContext)
-        {
-            dbContext.Set<Product>().AddRange(new []
-            {
-                new Product()
-                {
-                    Name = "iPhone",
-                    Price = 500
-                },
-                new Product()
-                {
-                    Name = "MacBook",
-                    Price = 1000
-                }
-            });
-
-            dbContext.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult ChangePrice([FromQuery]ChangePrice changePrice)
-        {
-            return View(changePrice);
-        }
-        
         public IActionResult Index([FromServices] DbContext dbContext) => 
             dbContext
                 .Set<Product>()
@@ -53,6 +28,39 @@ namespace DotNext.DddWorkshop.Areas.Products
                 .FirstOrDefault(x => x.Id == id)
                 .PipeTo(View);
 
+        public IActionResult AddToCart([FromServices] DbContext dbContext, int id)
+        {
+            var product = dbContext
+                .Set<Product>()
+                .First(x => x.Id == id);
+
+            var cart = HttpContext
+                .Session
+                .Get<Cart>("Cart") 
+                       ?? new Cart {Id = Guid.NewGuid()};
+            
+            var ci = cart.CartItems
+                .FirstOrDefault(x => x.Product.Id == product.Id);
+
+            if (ci == null)
+            {
+                ci = new CartItem
+                {
+                    Product = product,
+                    Count = 1
+                };
+                cart.CartItems.Add(ci);
+            }
+            else
+            {
+                ci.Count++;
+            }
+            
+            HttpContext.Session.Set("Cart", cart);
+            this.ShowMessage("Product added");
+            return Redirect("../");
+        }
+        
         [HttpPost]
         public IActionResult Edit([FromServices] DbContext dbContext, Product product)
         {

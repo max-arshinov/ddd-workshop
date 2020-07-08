@@ -2,9 +2,9 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DotNext.DddWorkshop.Models
+namespace DddWorkshop.Models
 {
-    public abstract class HasIdBase: HasIdBase<int>
+    public abstract class IntHasIdBase: HasIdBase<int>
     {}
     
     public abstract class HasIdBase<TKey>

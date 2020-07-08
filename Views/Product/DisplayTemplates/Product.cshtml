@@ -1,0 +1,14 @@
+@model DddWorkshop.Models.Product
+<div class="form-group">
+    @Model?.ToString()
+    <a href="../Edit/@Model?.Id">Edit</a>
+</div>
+
+@if (Model != null)
+{
+    using (Html.BeginForm("AddToCart", "Product", FormMethod.Post))
+    {
+        @Html.Hidden("Id", Model.Id)
+        <input type="submit" class="btn btn-primary" value="Add to Cart">
+    }
+}

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DotNext.DddWorkshop.Areas.Products.Domain
+namespace DddWorkshop.Models
 {
     public class Product
     {

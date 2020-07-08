@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace DotNext.DddWorkshop.Models
+namespace DddWorkshop.Models
 {
     public class AuditLog: IntEntityBase
     {

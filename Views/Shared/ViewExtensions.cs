@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace DotNext.DddWorkshop.Views.Shared
+namespace DddWorkshop.Views.Shared
 {
     public static class ViewExtensions
     {

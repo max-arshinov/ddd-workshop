@@ -1,7 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DotNext.DddWorkshop.Models
+namespace DddWorkshop.Models
 {
     public abstract class EntityBase<T>
         where T: IEquatable<T>

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Linq.Expressions;
 
-namespace DotNext.DddWorkshop.Infrastructure
+namespace DddWorkshop.Infrastructure
 {
     internal class CompiledExpressions<TIn, TOut>
     {

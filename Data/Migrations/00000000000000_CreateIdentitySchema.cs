@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DotNext.DddWorkshop.Data.Migrations
+namespace DddWorkshop.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

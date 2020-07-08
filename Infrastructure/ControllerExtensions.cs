@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace DotNext.DddWorkshop.Infrastructure
+namespace DddWorkshop.Infrastructure
 {
     public static class ControllerExtensions
     {

@@ -33,7 +33,7 @@
     
         if (id != null)
         {
-            <li>@Html.ActionLink((string) m.ToString(), "Display", new {Id = id})</li>
+            <li>@Html.ActionLink(m.ToString() ?? "???", "Display", new {Id = id})</li>
         }
     }
 </ul>

@@ -1,6 +1,4 @@
-using System;
-
-namespace DotNext.DddWorkshop.Models
+namespace DddWorkshop.Models
 {
     public class ErrorViewModel
     {

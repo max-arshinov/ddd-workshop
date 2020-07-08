@@ -2,7 +2,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace DotNext.DddWorkshop.Infrastructure
+namespace DddWorkshop.Infrastructure
 {
     public class ValidationFilter: IActionFilter
     {

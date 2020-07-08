@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNext.DddWorkshop", "DotNext.DddWorkshop.csproj", "{727062ED-C083-4F6B-B83A-C317F44E78CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DddWorkshop", "DddWorkshop.csproj", "{727062ED-C083-4F6B-B83A-C317F44E78CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

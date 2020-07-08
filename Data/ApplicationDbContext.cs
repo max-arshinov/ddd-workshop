@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DotNext.DddWorkshop.Areas.Products.Domain;
-using DotNext.DddWorkshop.Models;
+﻿using DddWorkshop.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace DotNext.DddWorkshop.Data
+namespace DddWorkshop.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
@@ -14,6 +10,8 @@ namespace DotNext.DddWorkshop.Data
         
         public DbSet<AuditLog> AuditLogs { get; set; }
         
+        public DbSet<Cart> Carts { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

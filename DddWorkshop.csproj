@@ -4,6 +4,8 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <UserSecretsId>aspnet-DotNext.DddWorkshop-B7E8CEB1-0F31-4D2E-8E41-62E9161A0D25</UserSecretsId>
         <LangVersion>8.0</LangVersion>
+        <AssemblyName>DddWorkshop</AssemblyName>
+        <RootNamespace>DddWorkshop</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,6 +19,18 @@
 
     <ItemGroup>
       <Content Update="Views\Shared\Edit.cshtml">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+      <Content Update="Views\Products\DisplayTemplates\Product.cshtml">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+      <Content Update="Views\Cart\Index.cshtml">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+      <Content Update="Views\Cart\DisplayTemplates\Cart.cshtml">
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       </Content>

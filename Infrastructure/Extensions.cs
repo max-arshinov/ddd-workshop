@@ -1,6 +1,6 @@
 using System;
 
-namespace DotNext.DddWorkshop.Infrastructure
+namespace DddWorkshop.Infrastructure
 {
     public static class Extensions
     {
