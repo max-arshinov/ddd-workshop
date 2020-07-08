@@ -1,7 +1,10 @@
 using System.Linq;
 using DddWorkshop.Areas.AdminArea.Domain;
+using DddWorkshop.Areas.Core.Domain;
 using DddWorkshop.Areas.Core.Infrastructure;
 using DddWorkshop.Areas.Shop.Domain;
+using Force.Extensions;
+using Force.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,8 +23,17 @@ namespace DddWorkshop.Areas.ProductManagement
         [HttpPost]
         [Route("Product/Edit/{id}")]
         [CommitAsync]
-        public IActionResult Edit([FromServices] DbContext dbContext, Product product)
+        public IActionResult Edit([FromServices] DbContext dbContext, UpdateProduct command)
         {
+            var product = dbContext
+                .Set<Product>()
+                .FirstOrDefaultById(command.Id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+            
             dbContext.Attach(product);
             dbContext.Update(product);
             dbContext.Add(new AuditLog

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DddWorkshop.Areas.Core.Infrastructure;
 using DddWorkshop.Areas.OrderManagement.Domain;
 using DddWorkshop.Areas.Shop.Domain;
+using Force.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,7 @@ namespace DddWorkshop.Areas.OrderManagement
                 .PipeTo(View);
 
         [Authorize]
+        [CommitAsync]
         public IActionResult CreateNew([FromServices] DbContext dbContext)
         {
             #warning Encapsulation

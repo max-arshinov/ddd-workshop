@@ -10,6 +10,6 @@ namespace DddWorkshop.Areas.Shop.Domain
         
         public int Count { get; set; }
 
-        public override string ToString() => Product.ToString();
+        public override string ToString() => $"{Product.Name}: ${Product.Price}";
     }
 }

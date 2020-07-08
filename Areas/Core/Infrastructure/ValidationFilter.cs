@@ -14,7 +14,7 @@ namespace DddWorkshop.Areas.Core.Infrastructure
         {
             if (!context.ModelState.IsValid)
             {
-                var c = ((Controller) context.Controller);
+                var c = (Controller) context.Controller;
                 c.ViewData["Message"] = "Model is invalid!";
                 context.Result = c.View(context.ActionArguments.Values.First());
             }

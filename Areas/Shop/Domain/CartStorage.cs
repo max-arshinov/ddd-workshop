@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using DddWorkshop.Areas.Core.Infrastructure;
+using Force.Extensions;
 using Microsoft.AspNetCore.Http;
 
 namespace DddWorkshop.Areas.Shop.Domain
@@ -16,24 +18,20 @@ namespace DddWorkshop.Areas.Shop.Domain
         private Cart _cart;
         private static string _cartKey = "Cart";
 
-        public Cart Cart
+        public Cart Cart =>
+            _cart ??= _accessor
+                          .HttpContext
+                          .Session
+                          .Get<CartDto>(_cartKey)
+                          .PipeTo(Cart.FromDto)
+                      ?? new Cart();
+
+        public void SaveChanges()
         {
-            get
-            {
-                return _cart ??= _accessor
-                                     .HttpContext
-                                     .Session
-                                     .Get<Cart>(_cartKey)
-                                 ?? new Cart {Id = Guid.NewGuid()};
-            }
-            set
-            {
-                _cart = value;
-                _accessor
-                    .HttpContext
-                    .Session
-                    .Set(_cartKey, _cart);
-            }
+            _accessor
+                .HttpContext
+                .Session
+                .Set(_cartKey, _cart.ToDto());
         }
     }
 }

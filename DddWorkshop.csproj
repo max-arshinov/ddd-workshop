@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Force" Version="3.1.0-alpha2" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.5" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.5" />
@@ -43,5 +44,11 @@
     <ItemGroup>
       <Folder Include="Areas\ProductManagement\Domain" />
       <Folder Include="Migrations" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Areas\Core\Domain\Product.Specs.cs">
+        <DependentUpon>Product.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 </Project>

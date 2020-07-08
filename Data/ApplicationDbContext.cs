@@ -1,4 +1,5 @@
 ﻿using DddWorkshop.Areas.AdminArea.Domain;
+using DddWorkshop.Areas.Core.Domain;
 using DddWorkshop.Areas.OrderManagement.Domain;
 using DddWorkshop.Areas.Shop.Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

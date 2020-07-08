@@ -1,7 +1,7 @@
 @using System.Net.Http
 @model DddWorkshop.Areas.Shop.Domain.Cart
 
-@if (Model != null)
+@if (Model != null && !Model.IsEmpty())
 {
     <div class="form-group">
     @Html.DisplayFor(x => x.CartItems)

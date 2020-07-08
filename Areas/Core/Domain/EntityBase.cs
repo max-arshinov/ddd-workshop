@@ -1,12 +1,15 @@
 using System;
+using Force.Ddd;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DddWorkshop.Areas.Core.Domain
 {
-    public abstract class EntityBase<T>
+    public abstract class EntityBase<T>: 
+        IHasId<T>
         where T: IEquatable<T>
     {
-        [HiddenInput]
+        object IHasId.Id => Id;
+
         public virtual T Id { get; protected set; }
         protected virtual object Actual => this;
 
