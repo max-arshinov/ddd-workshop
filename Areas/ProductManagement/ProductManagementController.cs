@@ -7,8 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DddWorkshop.Areas.ProductManagement
 {
-    public partial class  ProductController : Controller
+    public class ProductManagementController : Controller
     {
+        [Route("Product/Edit/{id}")]
         public IActionResult Edit([FromServices] DbContext dbContext, int id) =>
             dbContext
                 .Set<Product>()
@@ -17,6 +18,8 @@ namespace DddWorkshop.Areas.ProductManagement
         
         
         [HttpPost]
+        [Route("Product/Edit/{id}")]
+        [CommitAsync]
         public IActionResult Edit([FromServices] DbContext dbContext, Product product)
         {
             dbContext.Attach(product);
@@ -28,7 +31,6 @@ namespace DddWorkshop.Areas.ProductManagement
                 UserName = User.Identity.IsAuthenticated ? User.Identity.Name : "Anonymous"
             });
             
-            dbContext.SaveChanges();
             this.ShowMessage("Product saved");
             return View(product);
         }
