@@ -1,13 +1,43 @@
+@using DddWorkshop.Models
 @model IEnumerable<DddWorkshop.Models.Order>
 @if(Model.Any())
 {
+    var fsm = new Dictionary<OrderState, IEnumerable<OrderState>>
+    {
+        {OrderState.New, new [] {OrderState.Paid}},
+        {OrderState.Paid, new [] {OrderState.Shipped}},
+        {OrderState.Shipped, new [] {OrderState.Complete, OrderState.Dispute}},
+        {OrderState.Dispute, new [] {OrderState.Complete}}
+    };
+
+    var actionMap = new Dictionary<OrderState, string>
+    {
+        {OrderState.Paid, "Pay"},
+        {OrderState.Shipped, "Ship"},
+        {OrderState.Complete, "Complete"},
+        {OrderState.Dispute, "Dispute"}
+    };
+    
     <ul>
         @foreach (var order in Model)
         {
             <li>
                 <div class="form-group">
                     @order.Id / @order.State / @order.Created / @order.Updated: $@order.Total
-                    <input type="submit" class="btn btn-primary" value="Pay"/>
+                    @if (fsm.Keys.Contains(order.State))
+                    {
+                        foreach (var state in fsm[order.State])
+                        {
+                            var actionName = actionMap[state];
+                            <div class="form-group">
+                                @using (Html.BeginForm(actionName, "Order", FormMethod.Post))
+                                {
+                                <input type="hidden" name="Id" value="@order.Id"/>
+                                <input type="submit" class="btn btn-primary" value="@actionName"/>
+                                }
+                            </div>
+                        }
+                    }
                 </div>
             </li>
         }

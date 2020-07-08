@@ -1,6 +1,7 @@
 using System;
 using DddWorkshop.Data;
 using DddWorkshop.Infrastructure;
+using DddWorkshop.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -49,6 +50,10 @@ namespace DddWorkshop
             services.AddRazorPages();
 
             services.AddMvc(options => { options.Filters.Add(new ValidationFilter()); });
+
+            services.AddScoped<DeliveryService>();
+            services.AddScoped<PaymentService>();
+            services.AddScoped<DisputeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

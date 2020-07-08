@@ -65,6 +65,7 @@ namespace DddWorkshop.Controllers
         public IActionResult Edit([FromServices] DbContext dbContext, Product product)
         {
             dbContext.Attach(product);
+            dbContext.Update(product);
             dbContext.Add(new AuditLog
             {
                 EntityId = product.Id,

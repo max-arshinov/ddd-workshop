@@ -18,7 +18,9 @@ namespace DddWorkshop.Models
         [HiddenInput(DisplayValue = false)]
         public double DiscountedPrice => Price - Price /100 * DiscountPercent;
 
-        public override string ToString() => $"{Name} ${Price}";
+        public override string ToString() => DiscountPercent > 0
+            ? $"{Name} ${Price} Sale: ${DiscountPercent}%!"
+            : $"{Name} ${Price}";
     }
 
     public interface IHasDiscount

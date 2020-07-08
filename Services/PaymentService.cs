@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
-using DddWorkshop.Models;
 
-namespace DddWorkshop.Controllers
+namespace DddWorkshop.Services
 {
     public class PaymentService
     {
