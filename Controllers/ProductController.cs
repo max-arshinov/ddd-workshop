@@ -66,6 +66,7 @@ namespace DddWorkshop.Controllers
         {
             dbContext.Attach(product);
             dbContext.Update(product);
+            #warning Cross-cutting concerns
             dbContext.Add(new AuditLog
             {
                 EntityId = product.Id,
