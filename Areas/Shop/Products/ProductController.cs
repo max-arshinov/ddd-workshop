@@ -1,9 +1,7 @@
-using System;
 using System.Linq;
 using DddWorkshop.Areas.Core.Domain;
 using DddWorkshop.Areas.Core.Infrastructure;
 using DddWorkshop.Areas.Shop.Domain;
-using Force.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

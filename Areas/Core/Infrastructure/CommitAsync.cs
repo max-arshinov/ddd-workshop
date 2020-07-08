@@ -16,10 +16,11 @@ namespace DddWorkshop.Areas.Core.Infrastructure
                 return;
             }
             
-            var dbc = (DbContext)context.HttpContext.RequestServices.GetService(typeof(DbContext));
-            await dbc.SaveChangesAsync();
             var cartStorage = (CartStorage)context.HttpContext.RequestServices.GetService(typeof(CartStorage));
             cartStorage.SaveChanges();
+            
+            var dbc = (DbContext)context.HttpContext.RequestServices.GetService(typeof(DbContext));
+            await dbc.SaveChangesAsync();
             // TODO: notifications
         }
     }

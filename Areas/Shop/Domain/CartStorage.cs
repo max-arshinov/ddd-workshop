@@ -28,10 +28,13 @@ namespace DddWorkshop.Areas.Shop.Domain
 
         public void SaveChanges()
         {
-            _accessor
-                .HttpContext
-                .Session
-                .Set(_cartKey, _cart.ToDto());
+            if (_cart != null)
+            {
+                _accessor
+                    .HttpContext
+                    .Session
+                    .Set(_cartKey, _cart.ToDto());
+            }
         }
     }
 }

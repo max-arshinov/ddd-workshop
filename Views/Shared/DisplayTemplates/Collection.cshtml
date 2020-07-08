@@ -35,5 +35,9 @@
         {
             <li>@Html.ActionLink(m.ToString() ?? "???", "Display", new {Id = id})</li>
         }
+        else
+        {
+            @m.ToString()
+        }
     }
 </ul>

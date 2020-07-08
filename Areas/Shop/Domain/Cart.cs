@@ -20,7 +20,7 @@ namespace DddWorkshop.Areas.Shop.Domain
             _cartItems = new List<CartItem>(cartItems);
         }
         
-        private List<CartItem> _cartItems;
+        private readonly List<CartItem> _cartItems;
 
         public IEnumerable<CartItem> CartItems => _cartItems;
 
@@ -28,13 +28,15 @@ namespace DddWorkshop.Areas.Shop.Domain
         public void AddProduct(Product product)
         {
             var ci = _cartItems
-                .FirstOrDefault(x => x.Product.Id == product.Id);
+                .FirstOrDefault(x => x.ProductId == product.Id);
 
             if (ci == null)
             {
                 ci = new CartItem
                 {
-                    Product = product,
+                    ProductId = product.Id,
+                    Price = product.DiscountedPrice,
+                    ProductName = product.Name,
                     Count = 1
                 };
                 

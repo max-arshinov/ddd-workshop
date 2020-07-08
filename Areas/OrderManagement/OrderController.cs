@@ -15,12 +15,7 @@ namespace DddWorkshop.Areas.OrderManagement
     public class OrderController: Controller
     {
         public IActionResult Index([FromServices] DbContext dbContext) => 
-            dbContext
-                #warning Include or Lazy load might be required in the future
-                .Set<Order>()
-                .Where(x => x.User.UserName == User.Identity.Name)
-                .ToList()
-                .PipeTo(View);
+            this.Index(dbContext, x => x, Order.Specs.ByIdentity(User.Identity));
 
         [Authorize]
         [CommitAsync]
@@ -41,9 +36,8 @@ namespace DddWorkshop.Areas.OrderManagement
                 {
                     Order = order,
                     Count = x.Count,
-                    Name = x.Product.Name,
-                    Price = x.Product.Price,
-                    DiscountPercent = x.Product.DiscountPercent
+                    Name = x.ProductName,
+                    Price = x.Price
                 })
                 .ToList();
 

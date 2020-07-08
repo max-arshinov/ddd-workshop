@@ -15,8 +15,9 @@ namespace DddWorkshop.Areas.OrderManagement.Domain
     }
     
     #warning No invariant
-    public class Order: IntHasIdBase
+    public class Order: IntEntityBase
     {
+        public static readonly OrderSpecs Specs = new OrderSpecs();
         public IdentityUser User { get; set; }
         
         public DateTime Created { get; set; }

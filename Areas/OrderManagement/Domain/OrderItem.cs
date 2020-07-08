@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using DddWorkshop.Areas.Core.Domain;
 
@@ -12,6 +13,7 @@ namespace DddWorkshop.Areas.OrderManagement.Domain
         
         public double Price { get; set; }
         
+        [Obsolete]
         public int DiscountPercent { get; set; }
         
         public int Count { get; set; }

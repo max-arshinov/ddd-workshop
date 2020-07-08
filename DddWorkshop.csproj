@@ -50,5 +50,17 @@
       <Compile Update="Areas\Core\Domain\Product.Specs.cs">
         <DependentUpon>Product.cs</DependentUpon>
       </Compile>
+      <Compile Update="Areas\OrderManagement\Domain\OrderSpecs.cs">
+        <DependentUpon>Order.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Areas\OrderManagement\Domain\OrderItem.cs">
+        <DependentUpon>Order.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Areas\Shop\Domain\CartDto.cs">
+        <DependentUpon>Cart.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Areas\Shop\Domain\CartItem.cs">
+        <DependentUpon>Cart.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 </Project>
