@@ -19,31 +19,12 @@ namespace DddWorkshop.Areas.OrderManagement
 
         [Authorize]
         [CommitAsync]
-        public IActionResult CreateNew([FromServices] DbContext dbContext)
+        public IActionResult CreateNew(
+            [FromServices] DbContext dbContext,
+            [FromServices] CartStorage cartStorage)
         {
-            #warning Encapsulation
-            var cart = HttpContext.Session.Get<Cart>("Cart");
-            var order = new Order
-            {
-                User = dbContext
-                    .Set<IdentityUser>()
-                    .First(x => x.UserName == User.Identity.Name)
-            };
-
-            order.OrderItems = cart
-                .CartItems
-                .Select(x => new OrderItem
-                {
-                    Order = order,
-                    Count = x.Count,
-                    Name = x.ProductName,
-                    Price = x.Price
-                })
-                .ToList();
-
-            order.Total = order.OrderItems.Select(x => x.Price - x.Price / 100 * x.DiscountPercent).Sum();
+            var order = new Order(cartStorage.Cart);
             dbContext.Add(order);
-            dbContext.SaveChanges();
             
             this.ShowMessage("Order created");
             return Redirect("/Order");

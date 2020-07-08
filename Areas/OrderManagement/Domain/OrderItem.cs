@@ -1,11 +1,24 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using DddWorkshop.Areas.Core.Domain;
+using DddWorkshop.Areas.Shop.Domain;
 
 namespace DddWorkshop.Areas.OrderManagement.Domain
 {
-    public class OrderItem: IntHasIdBase
+    public class OrderItem: IntEntityBase
     {
+        protected OrderItem()
+        {
+        }
+
+        internal OrderItem(Order order, CartItem cartItem)
+        {
+            Order = order;
+            Count = cartItem.Count;
+            Name = cartItem.ProductName;
+            Price = cartItem.Price;
+        }
+        
         [Required]
         public string Name { get; set; }
         

@@ -1,10 +1,12 @@
 using System;
+using DddWorkshop.Areas.Core.Domain;
 using DddWorkshop.Areas.Core.Infrastructure;
 using DddWorkshop.Areas.OrderManagement.Domain;
 using DddWorkshop.Areas.Shop;
 using DddWorkshop.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -54,6 +56,8 @@ namespace DddWorkshop
 
             services.AddMvc(options => { options.Filters.Add(new ValidationFilter()); });
 
+            services.AddScoped(x => x.GetService<IHttpContextAccessor>().HttpContext.User.Identity);
+            services.AddScoped<UserContext>();
             services.RegisterShop();
             services.RegisterOrderManagement();
         }

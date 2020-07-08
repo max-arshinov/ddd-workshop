@@ -2,24 +2,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DddWorkshop.Areas.Core.Domain;
+using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 
 namespace DddWorkshop.Areas.Shop.Domain
 {
     public sealed class Cart: EntityBase<Guid>
     {
-        internal Cart()
+        internal Cart(IdentityUser user)
         {
+            User = user;
             Id = Guid.NewGuid();
             _cartItems = new List<CartItem>();
         }
 
-        internal Cart(Guid id, IEnumerable<CartItem> cartItems)
+        internal Cart(Guid id, IEnumerable<CartItem> cartItems, IdentityUser user)
         {
+            User = user;
             Id = id;
             _cartItems = new List<CartItem>(cartItems);
         }
-        
+
+        public IdentityUser User { get; protected set; }
+
         private readonly List<CartItem> _cartItems;
 
         public IEnumerable<CartItem> CartItems => _cartItems;
@@ -56,10 +61,10 @@ namespace DddWorkshop.Areas.Shop.Domain
             CartItems = _cartItems
         };
 
-        internal static Cart FromDto(CartDto dto)
+        internal static Cart FromDto(CartDto dto, IdentityUser user)
         {
             if (dto == null) return null;
-            return new Cart(dto.Id, dto.CartItems);
+            return new Cart(dto.Id, dto.CartItems, user);
         }
     }
 }
