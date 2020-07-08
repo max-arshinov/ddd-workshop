@@ -1,0 +1,10 @@
+﻿@model object
+@Model?.ToString()
+@{
+    var id = Model.GetType().GetProperty("Id");
+    if (id != null)
+    {
+        dynamic d = Model;
+        <a href="../Edit/@d.Id">Edit</a>
+    }
+}

@@ -1,0 +1,8 @@
+@using (var form = Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.EditorForModel()
+    </div>
+    
+    <div class="form-group"><button class="btn btn-primary">Save</button> <a href="../">Back</a></div>
+}
