@@ -8,21 +8,21 @@ namespace DddWorkshop.Areas.OrderManagement.Domain.Pay
 {
     public class PayOrderHandler: ChangeOrderStateHandlerBase<PayOrder>
     {
-        private readonly PaymentService _paymentService;
+        private readonly IPaymentService _paymentService;
 
-        public PayOrderHandler(DbContext dbContext, PaymentService paymentService) : base(dbContext)
+        public PayOrderHandler(DbContext dbContext, IPaymentService paymentService) : base(dbContext)
         {
             _paymentService = paymentService;
         }
 
-        protected override async Task<Result<(OrderState, string), string>> DoHandle(Order order, PayOrder command)
+        protected override async Task<Result<(OrderStatus, string), string>> DoHandle(Order order, PayOrder command)
         {
-            #warning Distributed transaction. No error handling
-            await _paymentService.PayAsync(command.Id);
-
-            #warning Encapsulation
-            order.State = OrderState.Paid;
-            return (order.State, "Order is paid");
+            if(order.State is Order.New newOrder)
+            {
+                await newOrder.PayAsync(_paymentService);
+                return (order.Status, "Order is paid");
+            }
+            return "Order is in wrong state";
         }
     }
 }

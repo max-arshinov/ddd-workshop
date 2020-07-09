@@ -2,20 +2,20 @@
 @model IEnumerable<DddWorkshop.Areas.OrderManagement.Domain.Order>
 @if(Model.Any())
 {
-    var fsm = new Dictionary<OrderState, IEnumerable<OrderState>>
+    var fsm = new Dictionary<OrderStatus, IEnumerable<OrderStatus>>
     {
-        {OrderState.New, new [] {OrderState.Paid}},
-        {OrderState.Paid, new [] {OrderState.Shipped}},
-        {OrderState.Shipped, new [] {OrderState.Complete, OrderState.Dispute}},
-        {OrderState.Dispute, new [] {OrderState.Complete}}
+        {OrderStatus.New, new [] {OrderStatus.Paid}},
+        {OrderStatus.Paid, new [] {OrderStatus.Shipped}},
+        {OrderStatus.Shipped, new [] {OrderStatus.Complete, OrderStatus.Dispute}},
+        {OrderStatus.Dispute, new [] {OrderStatus.Complete}}
     };
 
-    var actionMap = new Dictionary<OrderState, string>
+    var actionMap = new Dictionary<OrderStatus, string>
     {
-        {OrderState.Paid, "Pay"},
-        {OrderState.Shipped, "Ship"},
-        {OrderState.Complete, "Complete"},
-        {OrderState.Dispute, "Dispute"}
+        {OrderStatus.Paid, "Pay"},
+        {OrderStatus.Shipped, "Ship"},
+        {OrderStatus.Complete, "Complete"},
+        {OrderStatus.Dispute, "Dispute"}
     };
     
     <ul>
@@ -23,10 +23,10 @@
         {
             <li>
                 <div class="form-group">
-                    @order.Id / @order.State / @order.Created / @order.Updated: $@order.Total
-                    @if (fsm.Keys.Contains(order.State))
+                    @order.Id / @order.Status / @order.Created / @order.Updated: $@order.Total
+                    @if (fsm.Keys.Contains(order.Status))
                     {
-                        foreach (var state in fsm[order.State])
+                        foreach (var state in fsm[order.Status])
                         {
                             var actionName = actionMap[state];
                             <div class="form-group">

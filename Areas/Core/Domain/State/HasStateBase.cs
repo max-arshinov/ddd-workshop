@@ -4,7 +4,7 @@ using Force.Ddd;
 namespace DddWorkshop.Areas.Core.Domain.State
 {
     public abstract class HasStateBase<TStatus, TState>: 
-        HasIdBase,
+        EntityBase<int>,
         IHasStatus<TStatus>, 
         IHasState<TState>
         where TStatus: Enum

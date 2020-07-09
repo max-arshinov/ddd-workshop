@@ -78,5 +78,8 @@
       <Compile Update="Areas\OrderManagement\Domain\Dispute\DisputeOrderHandler.cs">
         <DependentUpon>DisputeOrder.cs</DependentUpon>
       </Compile>
+      <Compile Update="Areas\OrderManagement\Domain\OrderStatus.cs">
+        <DependentUpon>Order.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 </Project>

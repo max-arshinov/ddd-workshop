@@ -10,8 +10,8 @@ namespace DddWorkshop.Areas.OrderManagement
     {
         public static void RegisterOrderManagement(this IServiceCollection services)
         {
-            services.AddScoped<DeliveryService>();
-            services.AddScoped<PaymentService>();
+            services.AddScoped<IDeliveryService, DeliveryService>();
+            services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<DisputeService>();
 
             services.AddScoped<PayOrderHandler>();

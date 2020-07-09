@@ -14,11 +14,12 @@ namespace DddWorkshop.Areas.OrderManagement.Domain.Dispute
             _disputeService = disputeService;
         }
 
-        protected override async Task<Result<(OrderState, string), string>> DoHandle(Order order, DisputeOrder command)
+        protected override async Task<Result<(OrderStatus, string), string>> DoHandle(Order order, DisputeOrder command)
         {
+            // TODO: refactor this
             await _disputeService.DisputeAsync(command.Id);
-            order.State = OrderState.Dispute;
-            return (order.State, "Order is disputed");
+            //order.Status = OrderStatus.Dispute;
+            return (order.Status, "Order is disputed");
         }
     }
 }

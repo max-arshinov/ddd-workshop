@@ -8,7 +8,7 @@ namespace DddWorkshop.Areas.OrderManagement.Domain.Base
 {
     public abstract class ChangeOrderStateBase: 
         IHasId<int>,
-        ICommand<Task<Result<(OrderState, string), string>>>
+        ICommand<Task<Result<(OrderStatus, string), string>>>
     {
         object IHasId.Id => Id;
 

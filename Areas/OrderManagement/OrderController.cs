@@ -34,7 +34,7 @@ namespace DddWorkshop.Areas.OrderManagement
             return Redirect("/Order");
         }
 
-        private IActionResult  Match(Result<(OrderState, string), string> result) =>
+        private IActionResult  Match(Result<(OrderStatus, string), string> result) =>
         result.Match<IActionResult>(x =>
                 {
                     this.ShowMessage(x.Item2);
@@ -80,8 +80,8 @@ namespace DddWorkshop.Areas.OrderManagement
             {
                 return NotFound();
             }
-
-            order.State = OrderState.Complete;
+            // TODO: refactor this
+            //order.Status = OrderStatus.Complete;
             dbContext.SaveChanges();
             
             this.ShowMessage("Order is complete");
