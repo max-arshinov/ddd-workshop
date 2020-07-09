@@ -9,10 +9,16 @@ namespace DddWorkshop.Areas.ProductManagement
 {
     public class ProductManagementController : Controller
     {
-        public ProductManagementController()
+        public IActionResult MassIncreasePrice([FromServices] IQueryable<Product> products)
         {
+            products
+                .Where(Product.Specs.IsForSale)
+                .MassIncreasePrice(new MassIncreasePrice(10));
             
+            this.ShowMessage("Prices increased");
+            return RedirectToAction("Index", "Product");
         }
+        
         [HttpGet("Product/Edit/{id}")]
         public IActionResult Edit([FromServices] IQueryable<Product> products, int id) =>
             products
@@ -30,7 +36,7 @@ namespace DddWorkshop.Areas.ProductManagement
                 this.ShowMessage("Product saved");
                 return View(command);
             }
-            catch (BusinessRuleException e)
+            catch (BusinessRuleException)
             {
                 return View(command);
             }

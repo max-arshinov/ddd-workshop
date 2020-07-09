@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="EFCore.BulkExtensions" Version="3.1.4" />
         <PackageReference Include="Force" Version="3.1.0-alpha2" />
         <PackageReference Include="JetBrains.Annotations" Version="2020.1.0" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.5" />
@@ -88,6 +89,9 @@
       </Compile>
       <Compile Update="Areas\ProductManagement\UpdateProductHandler.cs">
         <DependentUpon>UpdateProduct.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Areas\Core\Domain\Product.BatchUpdates.cs">
+        <DependentUpon>Product.cs</DependentUpon>
       </Compile>
     </ItemGroup>
 </Project>

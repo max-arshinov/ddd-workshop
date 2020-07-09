@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DddWorkshop.Areas.Core.Domain
 {
-    public class Product: IntEntityBase, IHasDomainEvents
+    public partial class Product: IntEntityBase, IHasDomainEvents
     {
         public static ProductSpecs Specs = new ProductSpecs();
         
