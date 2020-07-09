@@ -188,11 +188,12 @@ namespace DddWorkshop.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
                     Updated = table.Column<DateTime>(nullable: false),
-                    State = table.Column<int>(nullable: false),
-                    Total = table.Column<double>(nullable: false)
+                    Status = table.Column<int>(nullable: false),
+                    Total = table.Column<double>(nullable: false),
+                    TrackingCode = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -202,7 +203,7 @@ namespace DddWorkshop.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

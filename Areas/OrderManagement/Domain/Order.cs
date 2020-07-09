@@ -57,8 +57,6 @@ namespace DddWorkshop.Areas.OrderManagement.Domain
         public DateTime Created { get; protected set; } = DateTime.UtcNow;
         
         public DateTime Updated { get; protected set; }
-
-        public OrderStatus Status { get; protected set; }
         
         private List<OrderItem> _orderItems = new List<OrderItem>();
         public IEnumerable<OrderItem> OrderItems => _orderItems;

@@ -16,7 +16,7 @@ namespace DddWorkshop.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.5");
 
-            modelBuilder.Entity("DddWorkshop.Models.AuditLog", b =>
+            modelBuilder.Entity("DddWorkshop.Areas.AdminArea.Domain.AuditLog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,7 +38,28 @@ namespace DddWorkshop.Migrations
                     b.ToTable("AuditLogs");
                 });
 
-            modelBuilder.Entity("DddWorkshop.Models.Order", b =>
+            modelBuilder.Entity("DddWorkshop.Areas.Core.Domain.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DiscountPercent")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("DddWorkshop.Areas.OrderManagement.Domain.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,16 +68,20 @@ namespace DddWorkshop.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("State")
+                    b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
                     b.Property<double>("Total")
                         .HasColumnType("REAL");
 
+                    b.Property<Guid?>("TrackingCode")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("Updated")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -66,7 +91,7 @@ namespace DddWorkshop.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("DddWorkshop.Models.OrderItem", b =>
+            modelBuilder.Entity("DddWorkshop.Areas.OrderManagement.Domain.OrderItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -93,27 +118,6 @@ namespace DddWorkshop.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("OrderItem");
-                });
-
-            modelBuilder.Entity("DddWorkshop.Models.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("DiscountPercent")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("REAL");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -312,16 +316,18 @@ namespace DddWorkshop.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("DddWorkshop.Models.Order", b =>
+            modelBuilder.Entity("DddWorkshop.Areas.OrderManagement.Domain.Order", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("DddWorkshop.Models.OrderItem", b =>
+            modelBuilder.Entity("DddWorkshop.Areas.OrderManagement.Domain.OrderItem", b =>
                 {
-                    b.HasOne("DddWorkshop.Models.Order", "Order")
+                    b.HasOne("DddWorkshop.Areas.OrderManagement.Domain.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId");
                 });

@@ -22,6 +22,7 @@ namespace DddWorkshop.Areas.OrderManagement.Domain.Pay
                 await newOrder.PayAsync(_paymentService);
                 return (order.Status, "Order is paid");
             }
+            
             return "Order is in wrong state";
         }
     }
