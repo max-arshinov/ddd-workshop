@@ -1,6 +1,7 @@
 using System;
 using DddWorkshop.Areas.Core.Domain;
 using DddWorkshop.Areas.Core.Infrastructure;
+using DddWorkshop.Areas.OrderManagement;
 using DddWorkshop.Areas.OrderManagement.Domain;
 using DddWorkshop.Areas.Shop;
 using DddWorkshop.Data;

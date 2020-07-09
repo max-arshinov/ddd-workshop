@@ -62,5 +62,8 @@
       <Compile Update="Areas\Shop\Domain\CartItem.cs">
         <DependentUpon>Cart.cs</DependentUpon>
       </Compile>
+      <Compile Update="Areas\OrderManagement\Domain\OrderStates.cs">
+        <DependentUpon>Order.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 </Project>

@@ -1,8 +1,7 @@
 using DddWorkshop.Areas.OrderManagement.Domain;
-using DddWorkshop.Areas.Shop.Domain;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DddWorkshop.Areas.Shop
+namespace DddWorkshop.Areas.OrderManagement
 {
     public static class OrderManagementRegistration
     {
