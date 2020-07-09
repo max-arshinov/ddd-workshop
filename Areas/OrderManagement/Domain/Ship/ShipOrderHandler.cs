@@ -18,6 +18,7 @@ namespace DddWorkshop.Areas.OrderManagement.Domain.Ship
         protected override async Task<Result<(OrderState, string), string>> DoHandle(Order order, ShipOrder command)
         {
             await _deliveryService.ShipAsync(command.Id);
+            #warning No Tests
             order.State = OrderState.Shipped;
             
             return (order.State, "Order is shipped");
