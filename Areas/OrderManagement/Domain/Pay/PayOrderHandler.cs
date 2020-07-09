@@ -19,6 +19,7 @@ namespace DddWorkshop.Areas.OrderManagement.Domain.Pay
         {
             if(order.State is Order.New newOrder)
             {
+                // TODO: order calculator
                 await newOrder.PayAsync(_paymentService);
                 return (order.Status, "Order is paid");
             }
