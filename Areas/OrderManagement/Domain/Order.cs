@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using DddWorkshop.Areas.Core.Domain;
+using DddWorkshop.Areas.OrderManagement.Domain.New;
 using DddWorkshop.Areas.Shop.Domain;
 using Microsoft.AspNetCore.Identity;
 
@@ -24,9 +26,11 @@ namespace DddWorkshop.Areas.OrderManagement.Domain
         {
         }
 
-        public Order(Cart cart)
+        public Order(NewOrder command)
         {
+            var cart = command.Cart;
             User = cart.User ?? throw new InvalidOperationException("User must be authenticated");
+            
             _orderItems = cart
                 .CartItems
                 .Select(x => new OrderItem(this, x)
@@ -42,6 +46,7 @@ namespace DddWorkshop.Areas.OrderManagement.Domain
             State = OrderState.New;
         }
 
+        [Required]
         public IdentityUser User { get; protected set; }
 
         public DateTime Created { get; protected set; } = DateTime.UtcNow;

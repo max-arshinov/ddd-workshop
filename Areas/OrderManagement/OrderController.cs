@@ -2,10 +2,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using DddWorkshop.Areas.Core.Infrastructure;
 using DddWorkshop.Areas.OrderManagement.Domain;
+using DddWorkshop.Areas.OrderManagement.Domain.Dispute;
+using DddWorkshop.Areas.OrderManagement.Domain.New;
+using DddWorkshop.Areas.OrderManagement.Domain.Pay;
+using DddWorkshop.Areas.OrderManagement.Domain.Ship;
 using DddWorkshop.Areas.Shop.Domain;
+using Force.Ccc;
 using Force.Extensions;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,92 +21,53 @@ namespace DddWorkshop.Areas.OrderManagement
         public IActionResult Index([FromServices] DbContext dbContext) => 
             this.Index(dbContext, x => x, Order.Specs.ByIdentity(User.Identity));
 
-        [Authorize]
+        
         [CommitAsync]
         public IActionResult CreateNew(
             [FromServices] DbContext dbContext,
             [FromServices] CartStorage cartStorage)
         {
-            var order = new Order(cartStorage.Cart);
+            var order = new Order(new NewOrder(cartStorage.Cart));
             dbContext.Add(order);
             
             this.ShowMessage("Order created");
             return Redirect("/Order");
         }
 
-        #warning DRY violation
+        private IActionResult  Match(Result<(OrderState, string), string> result) =>
+        result.Match<IActionResult>(x =>
+                {
+                    this.ShowMessage(x.Item2);
+                    return RedirectToAction("Index");
+                }, x =>
+                {
+                    this.ShowError(x);
+                    return View();
+                });
+
+        [CommitAsync]
         public async Task<IActionResult> Pay(
-            [FromServices] DbContext dbContext, 
-            [FromServices] PaymentService paymentService, 
-            int id)
-        {
-            var order = dbContext
-                .Set<Order>()
-                .First(x => x.Id == id);
+            [FromServices] PayOrderHandler handler,
+            PayOrder command) =>
+            (await handler.Handle(command)).PipeTo(Match);
 
-            if (order == null)
-            {
-                return NotFound();
-            }
 
-            #warning Distributed transaction. No error handling
-            await paymentService.PayAsync(id);
-            
-            #warning Encapsulation
-            order.State = OrderState.Paid;
-            dbContext.SaveChanges();
-            
-            this.ShowMessage("Order is paid");
-            return Redirect("../");
-        }
-        
-        #warning DRY violation
+        [CommitAsync]
         public async Task<IActionResult> Ship(
-            [FromServices] DbContext dbContext, 
-            [FromServices] DeliveryService deliveryService, 
-            int id)
-        {
-            var order = dbContext
-                .Set<Order>()
-                .First(x => x.Id == id);
-
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            await deliveryService.ShipAsync(id);
-            order.State = OrderState.Shipped;
-            dbContext.SaveChanges();
-            
-            this.ShowMessage("Order is shipped");
-            return RedirectToAction("Index");
-        }
+            [FromServices] ShipOrderHandler handler,
+            ShipOrder command) =>
+            (await handler.Handle(command)).PipeTo(Match);
         
-        #warning DRY violation
+        
+        [CommitAsync]
         public async Task<IActionResult> Dispute(
-            [FromServices] DbContext dbContext,
-            [FromServices] DisputeService disputeService, 
-            int id)
-        {
-            var order = dbContext
-                .Set<Order>()
-                .First(x => x.Id == id);
-
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            await disputeService.DisputeAsync(id);
-            order.State = OrderState.Dispute;
-            dbContext.SaveChanges();
-            
-            this.ShowMessage("Order is disputed");
-            return RedirectToAction("Index");
-        }
+            [FromServices] DisputeOrderHandler handler,
+            DisputeOrder command) =>
+            (await handler.Handle(command)).PipeTo(Match);
+  
         
-        #warning DRY violation
+        // TODO: refactor it
+        // Use ActionResut<T> instead?
         public IActionResult Complete(
             [FromServices] DbContext dbContext,
             int id)

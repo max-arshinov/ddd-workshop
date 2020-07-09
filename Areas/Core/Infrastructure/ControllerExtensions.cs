@@ -17,7 +17,12 @@ namespace DddWorkshop.Areas.Core.Infrastructure
         {
             c.TempData["Message"] = message;
         }
-
+        
+        public static void ShowError(this Controller c, string message)
+        {
+            c.TempData["Error"] = message;
+        }
+       
         public static IActionResult Display<TEntity, TDto>(
             this Controller controller,
             [FromServices] DbContext dbContext,

@@ -42,6 +42,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Areas\OrderManagement\Domain\Complete" />
       <Folder Include="Areas\ProductManagement\Domain" />
       <Folder Include="Migrations" />
     </ItemGroup>
@@ -64,6 +65,18 @@
       </Compile>
       <Compile Update="Areas\OrderManagement\Domain\OrderStates.cs">
         <DependentUpon>Order.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Areas\OrderManagement\Domain\Base\ChangeOrderStateHandlerBase.cs">
+        <DependentUpon>ChangeOrderStateBase.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Areas\OrderManagement\Domain\Ship\ShipOrderHandler.cs">
+        <DependentUpon>ShipOrder.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Areas\OrderManagement\Domain\Pay\PayOrderHandler.cs">
+        <DependentUpon>PayOrder.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Areas\OrderManagement\Domain\Dispute\DisputeOrderHandler.cs">
+        <DependentUpon>DisputeOrder.cs</DependentUpon>
       </Compile>
     </ItemGroup>
 </Project>

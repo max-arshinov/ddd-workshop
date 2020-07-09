@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace DddWorkshop.Areas.OrderManagement.Domain
+namespace DddWorkshop.Areas.OrderManagement.Domain.Pay
 {
     public class PaymentService
     {

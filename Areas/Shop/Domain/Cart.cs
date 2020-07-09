@@ -23,7 +23,7 @@ namespace DddWorkshop.Areas.Shop.Domain
             _cartItems = new List<CartItem>(cartItems);
         }
 
-        public IdentityUser User { get; protected set; }
+        public IdentityUser User { get; private set; }
 
         private readonly List<CartItem> _cartItems;
 
