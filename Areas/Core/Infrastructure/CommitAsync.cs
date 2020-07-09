@@ -16,7 +16,7 @@ namespace DddWorkshop.Areas.Core.Infrastructure
                 return;
             }
             
-            var cartStorage = (CartStorage)context.HttpContext.RequestServices.GetService(typeof(CartStorage));
+            var cartStorage = (ICartStorage)context.HttpContext.RequestServices.GetService(typeof(ICartStorage));
             cartStorage.SaveChanges();
             
             var dbc = (DbContext)context.HttpContext.RequestServices.GetService(typeof(DbContext));

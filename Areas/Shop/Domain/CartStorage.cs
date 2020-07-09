@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace DddWorkshop.Areas.Shop.Domain
 {
-    public class CartStorage
+    public class CartStorage : ICartStorage
     {
         private readonly IHttpContextAccessor _accessor;
         private readonly UserContext _userContext;

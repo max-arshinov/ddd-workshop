@@ -1,7 +1,10 @@
 using DddWorkshop.Areas.OrderManagement.Domain;
 using DddWorkshop.Areas.OrderManagement.Domain.Dispute;
+using DddWorkshop.Areas.OrderManagement.Domain.New;
 using DddWorkshop.Areas.OrderManagement.Domain.Pay;
 using DddWorkshop.Areas.OrderManagement.Domain.Ship;
+using DddWorkshop.Areas.Shop.Domain;
+using Force.Ccc;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DddWorkshop.Areas.OrderManagement
@@ -14,9 +17,12 @@ namespace DddWorkshop.Areas.OrderManagement
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<DisputeService>();
 
+            services.AddScoped<NewOrderHandler>();
             services.AddScoped<PayOrderHandler>();
             services.AddScoped<ShipOrderHandler>();
             services.AddScoped<DisputeOrderHandler>();
+            
+            services.AddScoped<IValidator<Cart>, NewOrderCartValidator>();
         }
     }
 }

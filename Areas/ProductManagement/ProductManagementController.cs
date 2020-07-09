@@ -18,33 +18,15 @@ namespace DddWorkshop.Areas.ProductManagement
                 .Set<Product>()
                 .FirstOrDefault(x => x.Id == id)
                 .PipeTo(View);
-        
-        
+
         [HttpPost]
         [Route("Product/Edit/{id}")]
         [CommitAsync]
-        public IActionResult Edit([FromServices] DbContext dbContext, UpdateProduct command)
+        public IActionResult Edit([FromServices] UpdateProductHandler handler, UpdateProduct command)
         {
-            var product = dbContext
-                .Set<Product>()
-                .FirstOrDefaultById(command.Id);
-
-            if (product == null)
-            {
-                return NotFound();
-            }
-            
-            dbContext.Attach(product);
-            dbContext.Update(product);
-            dbContext.Add(new AuditLog
-            {
-                EntityId = product.Id,
-                EventName = "Product Updated",
-                UserName = User.Identity.IsAuthenticated ? User.Identity.Name : "Anonymous"
-            });
-            
+            handler.Handle(command);
             this.ShowMessage("Product saved");
-            return View(product);
+            return View(command);
         }
     }
 }

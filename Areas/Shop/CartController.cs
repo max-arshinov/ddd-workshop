@@ -7,7 +7,7 @@ namespace DddWorkshop.Areas.Shop
 {
     public class CartController: Controller
     {
-        public IActionResult Index([FromServices] CartStorage storage) =>
+        public IActionResult Index([FromServices] ICartStorage storage) =>
             storage
                 .Cart
                 .PipeTo(View);

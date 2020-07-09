@@ -10,6 +10,7 @@
 
     <ItemGroup>
         <PackageReference Include="Force" Version="3.1.0-alpha2" />
+        <PackageReference Include="JetBrains.Annotations" Version="2020.1.0" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.5" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.5" />
@@ -42,8 +43,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Areas\OrderManagement\Domain\Complete" />
-      <Folder Include="Areas\ProductManagement\Domain" />
       <Folder Include="Migrations" />
     </ItemGroup>
 
@@ -80,6 +79,15 @@
       </Compile>
       <Compile Update="Areas\OrderManagement\Domain\OrderStatus.cs">
         <DependentUpon>Order.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Areas\OrderManagement\Domain\New\NewOrderCartHandler.cs">
+        <DependentUpon>NewOrder.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Areas\OrderManagement\Domain\New\NewOrderCartValidator.cs">
+        <DependentUpon>NewOrderCart.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Areas\ProductManagement\UpdateProductHandler.cs">
+        <DependentUpon>UpdateProduct.cs</DependentUpon>
       </Compile>
     </ItemGroup>
 </Project>

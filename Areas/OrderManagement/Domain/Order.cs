@@ -5,6 +5,7 @@ using System.Linq;
 using DddWorkshop.Areas.Core.Domain;
 using DddWorkshop.Areas.Core.Domain.State;
 using DddWorkshop.Areas.OrderManagement.Domain.New;
+using DddWorkshop.Areas.Shop.Domain;
 using Microsoft.AspNetCore.Identity;
 
 namespace DddWorkshop.Areas.OrderManagement.Domain
@@ -18,9 +19,9 @@ namespace DddWorkshop.Areas.OrderManagement.Domain
         {
         }
 
-        public Order(NewOrder command)
+        internal Order(Cart cart)
         {
-            var cart = command.Cart;
+            if (cart == null) throw new ArgumentNullException(nameof(cart));
             User = cart.User ?? throw new InvalidOperationException("User must be authenticated");
             
             _orderItems = cart

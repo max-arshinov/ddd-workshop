@@ -18,7 +18,7 @@ namespace DddWorkshop.Areas.Shop.Products
         [CommitAsync]
         public IActionResult AddToCart(
             [FromServices] DbContext dbContext, 
-            [FromServices] CartStorage cartStorage,
+            [FromServices] ICartStorage cartStorage,
             int id)
         {
             var product = dbContext

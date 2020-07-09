@@ -21,17 +21,12 @@ namespace DddWorkshop.Areas.OrderManagement
         public IActionResult Index([FromServices] DbContext dbContext) => 
             this.Index(dbContext, x => x, Order.Specs.ByIdentity(User.Identity));
 
-        
-        [CommitAsync]
         public IActionResult CreateNew(
-            [FromServices] DbContext dbContext,
-            [FromServices] CartStorage cartStorage)
+            [FromServices] NewOrderHandler handler)
         {
-            var order = new Order(new NewOrder(cartStorage.Cart));
-            dbContext.Add(order);
-            
+            handler.Handle(new NewOrder());
             this.ShowMessage("Order created");
-            return Redirect("/Order");
+            return RedirectToAction("Index");
         }
 
         private IActionResult  Match(Result<(OrderStatus, string), string> result) =>

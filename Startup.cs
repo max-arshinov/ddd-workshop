@@ -5,6 +5,7 @@ using DddWorkshop.Areas.OrderManagement;
 using DddWorkshop.Areas.OrderManagement.Domain;
 using DddWorkshop.Areas.Shop;
 using DddWorkshop.Data;
+using Force.Ccc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -59,6 +60,8 @@ namespace DddWorkshop
 
             services.AddScoped(x => x.GetService<IHttpContextAccessor>().HttpContext.User.Identity);
             services.AddScoped<UserContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.RegisterShop();
             services.RegisterOrderManagement();
         }

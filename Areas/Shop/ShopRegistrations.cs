@@ -7,7 +7,7 @@ namespace DddWorkshop.Areas.Shop
     {
         public static void RegisterShop(this IServiceCollection services)
         {
-            services.AddScoped<CartStorage>();
+            services.AddScoped<ICartStorage, CartStorage>();
         }
     }
 }

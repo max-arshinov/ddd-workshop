@@ -1,9 +1,11 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using DddWorkshop.Areas.Core.Domain;
+using Force.Ddd.DomainEvents;
 
 namespace DddWorkshop.Areas.AdminArea.Domain
 {
-    public class AuditLog: IntEntityBase
+    public class AuditLog: IntEntityBase, IDomainEvent
     {
         [Required]
         public string EventName { get; set; }
@@ -15,5 +17,7 @@ namespace DddWorkshop.Areas.AdminArea.Domain
 
         public override string ToString() =>
             $"{UserName} / {EventName} / {EntityId}";
+
+        public DateTime Happened { get; } = DateTime.UtcNow;
     }
 }
