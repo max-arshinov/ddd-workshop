@@ -49,8 +49,6 @@ namespace DddWorkshop
             #endif
             services.AddRazorPages();
 
-            services.AddMvc(options => { options.Filters.Add(new ValidationFilter()); });
-
             services.AddScoped<DeliveryService>();
             services.AddScoped<PaymentService>();
             services.AddScoped<DisputeService>();
