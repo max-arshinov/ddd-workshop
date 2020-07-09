@@ -3,6 +3,7 @@ using DddWorkshop.Areas.Core.Domain;
 using DddWorkshop.Areas.Core.Infrastructure;
 using DddWorkshop.Areas.OrderManagement;
 using DddWorkshop.Areas.OrderManagement.Domain;
+using DddWorkshop.Areas.ProductManagement;
 using DddWorkshop.Areas.Shop;
 using DddWorkshop.Data;
 using Force.Ccc;
@@ -56,14 +57,14 @@ namespace DddWorkshop
             #endif
             services.AddRazorPages();
 
-            services.AddMvc(options => { options.Filters.Add(new ValidationFilter()); });
-
             services.AddScoped(x => x.GetService<IHttpContextAccessor>().HttpContext.User.Identity);
             services.AddScoped<UserContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            // can be registered by conventions
             services.RegisterShop();
             services.RegisterOrderManagement();
+            services.RegisterProductManagement();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
